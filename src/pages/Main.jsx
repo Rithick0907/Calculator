@@ -1,7 +1,14 @@
+import { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import StyledMain from "./Main.styles";
 
-const Main = ({ clearValue, setOperation, setValue, setResult, value }) => {
+const Main = ({ clearValue, setPrevValue, setValue, setResult, value }) => {
+  const [operation, setOperation] = useState("+");
+  const handleSetOperation = (val) => {
+    setPrevValue();
+    setOperation(() => val);
+    clearValue();
+  };
   return (
     <StyledMain fluid>
       <Row>
@@ -11,61 +18,63 @@ const Main = ({ clearValue, setOperation, setValue, setResult, value }) => {
         <Col xs={{ span: 6 }} onClick={clearValue}>
           AC
         </Col>
-        <Col xs onClick={() => setOperation("%")}>
+        <Col xs onClick={() => handleSetOperation("%")}>
           %
         </Col>
-        <Col xs onClick={() => setOperation("/")}>
+        <Col xs onClick={() => handleSetOperation("/")}>
           /
         </Col>
       </Row>
       <Row>
-        <Col xs onClick={() => setValue(7)}>
+        <Col xs onClick={() => setValue("7")}>
           7
         </Col>
-        <Col xs onClick={() => setValue(8)}>
+        <Col xs onClick={() => setValue("8")}>
           8
         </Col>
-        <Col xs onClick={() => setValue(9)}>
+        <Col xs onClick={() => setValue("9")}>
           9
         </Col>
-        <Col xs onClick={setOperation("*")}>
+        <Col xs onClick={() => handleSetOperation("*")}>
           *
         </Col>
       </Row>
       <Row>
-        <Col xs onClick={() => setValue(4)}>
+        <Col xs onClick={() => setValue("4")}>
           4
         </Col>
-        <Col xs onClick={() => setValue(5)}>
+        <Col xs onClick={() => setValue("5")}>
           5
         </Col>
-        <Col xs onClick={() => setValue(6)}>
+        <Col xs onClick={() => setValue("6")}>
           6
         </Col>
-        <Col xs onClick={setOperation("-")}>
+        <Col xs onClick={() => handleSetOperation("-")}>
           -
         </Col>
       </Row>
       <Row>
-        <Col xs onClick={() => setValue(1)}>
+        <Col xs onClick={() => setValue("1")}>
           1
         </Col>
-        <Col xs onClick={() => setValue(2)}>
+        <Col xs onClick={() => setValue("2")}>
           2
         </Col>
-        <Col xs onClick={() => setValue(3)}>
+        <Col xs onClick={() => setValue("3")}>
           3
         </Col>
-        <Col xs onClick={() => setOperation("+")}>
+        <Col xs onClick={() => handleSetOperation("+")}>
           +
         </Col>
       </Row>
       <Row>
-        <Col xs={{ span: 6 }} onClick={() => setValue(0)}>
+        <Col xs={{ span: 6 }} onClick={() => setValue("0")}>
           0
         </Col>
-        <Col xs={3}>.</Col>
-        <Col className="last" onClick={setResult} xs={3}>
+        <Col xs={3} onClick={() => setValue(".")}>
+          .
+        </Col>
+        <Col className="last" onClick={() => setResult(operation)} xs={3}>
           =
         </Col>
       </Row>
