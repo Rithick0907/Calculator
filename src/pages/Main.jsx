@@ -2,12 +2,23 @@ import { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import StyledMain from "./Main.styles";
 
-const Main = ({ clearValue, setPrevValue, setValue, setResult, value }) => {
+const Main = ({
+  clearCurrentValue,
+  clearPreviousValue,
+  setPrevValue,
+  setValue,
+  setResult,
+  value
+}) => {
   const [operation, setOperation] = useState("+");
   const handleSetOperation = (val) => {
     setPrevValue();
     setOperation(() => val);
-    clearValue();
+    clearCurrentValue();
+  };
+  const handleClear = () => {
+    clearPreviousValue();
+    clearCurrentValue();
   };
   return (
     <StyledMain fluid>
@@ -15,7 +26,7 @@ const Main = ({ clearValue, setPrevValue, setValue, setResult, value }) => {
         <Col xs={{ span: 12 }}>{value}</Col>
       </Row>
       <Row>
-        <Col xs={{ span: 6 }} onClick={clearValue}>
+        <Col xs={{ span: 6 }} onClick={handleClear}>
           AC
         </Col>
         <Col xs onClick={() => handleSetOperation("%")}>

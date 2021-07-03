@@ -3,10 +3,12 @@ import { useState } from "react";
 
 const App = () => {
   const [value, setValue] = useState("0");
+  const [currValue, setCurrValue] = useState("0");
   const [prevValue, setPrevValue] = useState("0");
 
   const handleSetPrevValue = () => setPrevValue(() => value);
-  const clearValue = () => setValue(() => "0");
+  const clearCurrentValue = () => setValue(() => "0");
+  const clearPreviousValue = () => setPrevValue(() => "0");
   const handleSetValue = (val) => {
     setValue((prev) => {
       if (prev === "0" || prevValue === value) return val;
@@ -56,7 +58,8 @@ const App = () => {
 
   return (
     <Main
-      clearValue={clearValue}
+      clearCurrentValue={clearCurrentValue}
+      clearPreviousValue={clearPreviousValue}
       setPrevValue={handleSetPrevValue}
       setValue={handleSetValue}
       setResult={setResult}
