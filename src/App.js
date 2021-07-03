@@ -3,7 +3,6 @@ import { useState } from "react";
 
 const App = () => {
   const [value, setValue] = useState("0");
-  const [currValue, setCurrValue] = useState("0");
   const [prevValue, setPrevValue] = useState("0");
 
   const handleSetPrevValue = () => setPrevValue(() => value);
@@ -19,40 +18,52 @@ const App = () => {
   const setResult = (operation) => {
     switch (operation) {
       case "+":
-        setValue((currValue) => {
-          const sum = String(parseFloat(prevValue) + parseFloat(currValue));
-          setPrevValue(() => sum);
-          return sum;
-        });
+        if (prevValue !== "0") {
+          setValue((currValue) => {
+            const sum = String(parseFloat(prevValue) + parseFloat(currValue));
+            setPrevValue(() => sum);
+            return sum;
+          });
+        }
         break;
       case "-":
-        setValue((currValue) => {
-          const diff = String(parseFloat(prevValue) - parseFloat(currValue));
-          setPrevValue(() => diff);
-          return diff;
-        });
+        if (prevValue !== "0") {
+          setValue((currValue) => {
+            const diff = String(parseFloat(prevValue) - parseFloat(currValue));
+            setPrevValue(() => diff);
+            return diff;
+          });
+        }
         break;
       case "*":
-        setValue((currValue) => {
-          const mul = String(parseFloat(prevValue) * parseFloat(currValue));
-          setPrevValue(() => mul);
-          return mul;
-        });
+        if (prevValue !== "0") {
+          setValue((currValue) => {
+            const mul = String(parseFloat(prevValue) * parseFloat(currValue));
+            setPrevValue(() => mul);
+            return mul;
+          });
+        }
         break;
       case "/":
-        setValue((currValue) => {
-          const div = String(parseFloat(prevValue) / parseFloat(currValue));
-          setPrevValue(() => div);
-          return div;
-        });
+        if (prevValue !== "0") {
+          setValue((currValue) => {
+            const div = String(parseFloat(prevValue) / parseFloat(currValue));
+            setPrevValue(() => div);
+            return div;
+          });
+        }
         break;
       case "%":
-        setValue((currValue) => {
-          const mod = String(parseFloat(prevValue) % parseFloat(currValue));
-          setPrevValue(() => mod);
-          return mod;
-        });
+        if (prevValue !== "0") {
+          setValue((currValue) => {
+            const mod = String(parseFloat(prevValue) % parseFloat(currValue));
+            setPrevValue(() => mod);
+            return mod;
+          });
+        }
         break;
+      default:
+        setValue((curr) => prevValue);
     }
   };
 

@@ -11,10 +11,15 @@ const Main = ({
   value
 }) => {
   const [operation, setOperation] = useState("+");
-  const handleSetOperation = (val) => {
+  const handleSetOperation = async (val) => {
     setPrevValue();
-    setOperation(() => val);
+    setResult(operation);
+    setOperation((prev) => val);
     clearCurrentValue();
+  };
+  const handleSubmit = () => {
+    setResult(operation);
+    clearPreviousValue();
   };
   const handleClear = () => {
     clearPreviousValue();
@@ -85,7 +90,7 @@ const Main = ({
         <Col xs={3} onClick={() => setValue(".")}>
           .
         </Col>
-        <Col className="last" onClick={() => setResult(operation)} xs={3}>
+        <Col className="last" onClick={handleSubmit} xs={3}>
           =
         </Col>
       </Row>
